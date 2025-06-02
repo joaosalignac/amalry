@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: #008080;
-      font-family: Tahoma, sans-serif;
+      font-family: Tahoma, Geneva, Verdana, sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -92,7 +92,9 @@
         <div class="love-message">
           <p>Tu é uma das melhores coisas que já aconteceram na minha vida. 💌</p>
           <p>Obrigado por ser tão incrível. Eu te amo!</p>
-          <img src="https://i.imgur.com/7kz69Ow_d.webp?fidelity=grand" alt="Foto fofa">
+          <img src="https://i.imgur.com/7kz69Ow.webp" alt="Foto fofa">
+          <br>
+          <button onclick="goToAnimation()">Próximo</button>
         </div>
       </div>
     </div>
@@ -101,6 +103,9 @@
   <script>
     function showLove() {
       document.getElementById('love-section').classList.remove('hidden');
+    }
+    function goToAnimation() {
+      window.location.href = 'animacao.html';
     }
   </script>
 </body>
