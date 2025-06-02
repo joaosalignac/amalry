@@ -18,7 +18,7 @@
     .window {
       width: 90%; /* Janela ocupa 90% da largura da tela */
       max-width: 480px; /* Mas no máximo 480px */
-      background-color: #f0f8ff; /* Alterado para Azul Alice (bem clarinho) */
+      background-color: #f0f8ff; /* Azul Alice (bem clarinho) */
       border: 3px solid #fff;
       box-shadow:
         inset -1px -1px #808080,
@@ -62,6 +62,7 @@
       font-weight: bold;
       cursor: pointer;
       border-radius: 2px;
+      user-select: none; /* Impede a seleção do texto do botão */
     }
     .btn:active {
         border: 1px solid #fff;
@@ -75,7 +76,7 @@
       position: relative; /* Essencial para posicionar elementos filhos absolutamente */
       width: 100%;
       height: 280px;
-      background-color: #1a1a1a; /* cinza escuro */
+      background-color: #7c8da1; /* Cor de fundo da cena conforme o usuário alterou */
       overflow: hidden; /* Garante que nada saia da cena */
       border-top: 2px solid #808080;
       border-left: 2px solid #808080;
@@ -85,8 +86,8 @@
 
     .character {
       position: absolute; /* Posicionamento absoluto dentro da .scene */
-      width: 48px; /* Largura do personagem */
-      height: 48px; /* Altura do personagem */
+      width: 70px; /* Largura do personagem conforme o usuário alterou */
+      height: 70px; /* Altura do personagem conforme o usuário alterou */
       image-rendering: pixelated; /* Mantém a arte pixelada */
       bottom: 0; /* Alinha os personagens na base da cena */
     }
@@ -108,7 +109,8 @@
         left: 0;
       }
       100% {
-        left: calc(50% - 48px); /* Termina com a borda direita de João no centro */
+        /* Ajustado para a nova largura do personagem (70px) */
+        left: calc(50% - 70px);
       }
     }
 
@@ -117,7 +119,8 @@
         right: 0;
       }
       100% {
-        right: calc(50% - 48px); /* Termina com a borda esquerda de Amalry no centro */
+        /* Ajustado para a nova largura do personagem (70px) */
+        right: calc(50% - 70px);
       }
     }
 
@@ -126,8 +129,8 @@
       left: 50%; /* Começa no meio horizontal */
       transform: translateX(-50%); /* Ajusta para centralizar o elemento em si */
       top: 60px; /* Distância do topo da cena - ajustada para o novo tamanho */
-      width: 60px; /* Aumentado o tamanho do coração */
-      height: 60px; /* Aumentado o tamanho do coração */
+      width: 120px; /* Tamanho do coração conforme o usuário alterou */
+      height: 120px; /* Tamanho do coração conforme o usuário alterou */
       background-image: url('https://i.imgur.com/Tln6655.png');
       background-size: cover;
       opacity: 0;
@@ -140,8 +143,6 @@
       100% { transform: translateX(-50%) scale(1); opacity: 1; }
     }
 
-    /* Removido o CSS para .hug e @keyframes showHug pois o elemento foi removido do HTML */
-
   </style>
 </head>
 <body>
@@ -151,7 +152,7 @@
       <div class="title-buttons">
         <div class="btn">_</div>
         <div class="btn">▢</div>
-        <div class="btn">X</div>
+        <div class="btn" id="close-btn">X</div>
       </div>
     </div>
     <div class="scene">
@@ -164,5 +165,18 @@
       </audio>
     </div>
   </div>
+
+  <script>
+    // Seleciona o botão de fechar pelo ID
+    const closeButton = document.getElementById('close-btn');
+
+    // Adiciona um ouvinte de evento de clique ao botão
+    if (closeButton) {
+      closeButton.addEventListener('click', function() {
+        // Redireciona para o URL especificado
+        window.location.href = 'https://joaosalignac.github.io/amalry/';
+      });
+    }
+  </script>
 </body>
 </html>
