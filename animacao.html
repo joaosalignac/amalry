@@ -11,11 +11,13 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      font-family: Tahoma;
+      min-height: 100vh; /* Garante que o body ocupe pelo menos toda a altura da tela */
+      font-family: Tahoma, sans-serif; /* Adicionado sans-serif como fallback */
     }
+
     .window {
-      width: 480px;
+      width: 90%; /* Janela ocupa 90% da largura da tela */
+      max-width: 480px; /* Mas no máximo 480px */
       background-color: #c0c0c0;
       border: 3px solid #fff;
       box-shadow:
@@ -23,26 +25,35 @@
         inset 1px 1px #fff,
         inset -2px -2px #000,
         inset 2px 2px #c0c0c0;
+      border-radius: 3px; /* Pequeno arredondamento para suavizar as bordas da janela */
     }
+
     .title-bar {
       background: linear-gradient(to right, #000080, #0000cd);
       color: white;
-      padding: 4px 6px;
+      padding: 4px 8px; /* Ajuste no padding */
       display: flex;
       justify-content: space-between;
       align-items: center;
       font-weight: bold;
       font-size: 14px;
+      border-top-left-radius: 2px; /* Arredondamento acompanhando a janela */
+      border-top-right-radius: 2px;
     }
+
     .title-buttons {
       display: flex;
-      gap: 2px;
+      gap: 3px; /* Pequeno ajuste no espaçamento */
     }
+
     .btn {
       width: 16px;
       height: 16px;
       background-color: #c0c0c0;
-      border: 2px outset #fff;
+      border: 1px solid #808080; /* Borda mais sutil */
+      border-right-color: #fff;
+      border-bottom-color: #fff;
+      box-shadow: inset 1px 1px #fff, inset -1px -1px #0000004d; /* Sombra interna para efeito 3D */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -50,73 +61,112 @@
       color: black;
       font-weight: bold;
       cursor: pointer;
+      border-radius: 2px;
     }
+    .btn:active {
+        border: 1px solid #fff;
+        border-right-color: #808080;
+        border-bottom-color: #808080;
+        box-shadow: inset -1px -1px #fff, inset 1px 1px #0000004d;
+    }
+
+
     .scene {
-      position: relative;
+      position: relative; /* Essencial para posicionar elementos filhos absolutamente */
       width: 100%;
       height: 280px;
       background-color: #1a1a1a; /* cinza escuro */
-      overflow: hidden;
+      overflow: hidden; /* Garante que nada saia da cena */
       border-top: 2px solid #808080;
       border-left: 2px solid #808080;
       border-right: 2px solid #fff;
       border-bottom: 2px solid #fff;
     }
+
     .character {
-      position: absolute;
-      width: 48px;
-      height: 48px;
-      image-rendering: pixelated;
+      position: absolute; /* Posicionamento absoluto dentro da .scene */
+      width: 48px; /* Largura do personagem */
+      height: 48px; /* Altura do personagem */
+      image-rendering: pixelated; /* Mantém a arte pixelada */
+      bottom: 0; /* Alinha os personagens na base da cena */
     }
+
     #joao {
-      left: 0;
-      bottom: 0;
-      animation: moveRight 3s forwards;
+      left: 0; /* Começa na borda esquerda da cena */
+      /* Animação para mover João até pouco antes do centro */
+      animation: moveJoaoToCenter 3s forwards;
     }
+
     #amalry {
-      right: 0;
-      bottom: 0;
-      animation: moveLeft 3s forwards;
+      right: 0; /* Começa na borda direita da cena */
+      /* Animação para mover Amalry até pouco antes do centro */
+      animation: moveAmalryToCenter 3s forwards;
     }
-    @keyframes moveRight {
-      0% { left: 0; }
-      100% { left: 180px; }
+
+    /*
+      Os personagens têm 48px de largura.
+      Para se encontrarem no centro, João (da esquerda) precisa parar em '50% - 48px'.
+      Isso significa que a borda esquerda de João estará a 48px antes do ponto central da cena,
+      fazendo com que sua borda direita fique exatamente no centro.
+      Amalry (da direita) precisa parar sua borda direita em '50% - 48px' a partir da direita.
+      Isso significa que a borda direita de Amalry estará a 48px antes do ponto central (medido da direita),
+      fazendo com que sua borda esquerda fique exatamente no centro.
+    */
+    @keyframes moveJoaoToCenter {
+      0% {
+        left: 0;
+      }
+      100% {
+        left: calc(50% - 48px); /* Termina com a borda direita de João no centro */
+      }
     }
-    @keyframes moveLeft {
-      0% { right: 0; }
-      100% { right: 180px; }
+
+    @keyframes moveAmalryToCenter {
+      0% {
+        right: 0;
+      }
+      100% {
+        right: calc(50% - 48px); /* Termina com a borda esquerda de Amalry no centro */
+      }
     }
+
     .heart {
-      position: absolute;
-      top: 100px;
-      left: 210px;
+      position: absolute; /* Posicionamento absoluto para centralização */
+      left: 50%; /* Começa no meio horizontal */
+      transform: translateX(-50%); /* Ajusta para centralizar o elemento em si */
+      top: 80px; /* Distância do topo da cena */
       width: 36px;
       height: 36px;
       background-image: url('https://i.imgur.com/Tln6655.png');
       background-size: cover;
       opacity: 0;
-      animation: popHeart 1s ease 3s forwards;
+      animation: popHeart 1s ease 3s forwards; /* Inicia após os personagens se moverem */
     }
+
     @keyframes popHeart {
-      0% { transform: scale(0); opacity: 0; }
-      50% { transform: scale(1.2); opacity: 1; }
-      100% { transform: scale(1); opacity: 1; }
+      0% { transform: translateX(-50%) scale(0); opacity: 0; }
+      50% { transform: translateX(-50%) scale(1.2); opacity: 1; }
+      100% { transform: translateX(-50%) scale(1); opacity: 1; }
     }
+
     .hug {
       position: absolute;
-      left: 200px;
-      bottom: 0;
-      width: 64px;
-      height: 64px;
+      left: 50%; /* Centraliza horizontalmente */
+      transform: translateX(-50%); /* Ajusta para centralizar o elemento */
+      bottom: 0; /* Na base da cena, onde os personagens se encontram */
+      width: 64px; /* Largura da imagem do abraço */
+      height: 64px; /* Altura da imagem do abraço */
       background-image: url('https://i.imgur.com/q1Rb0QS.png');
       background-size: cover;
       image-rendering: pixelated;
       opacity: 0;
-      animation: showHug 0.5s ease-in 4.5s forwards;
+      /* Inicia após o coração aparecer e a animação dos personagens ter terminado */
+      animation: showHug 0.5s ease-in 4s forwards; /* Ajustado o delay para 4s */
     }
+
     @keyframes showHug {
-      0% { opacity: 0; transform: scale(0.8); }
-      100% { opacity: 1; transform: scale(1); }
+      0% { opacity: 0; transform: translateX(-50%) scale(0.8); }
+      100% { opacity: 1; transform: translateX(-50%) scale(1); }
     }
   </style>
 </head>
@@ -131,12 +181,12 @@
       </div>
     </div>
     <div class="scene">
+      <div class="heart"></div>
       <img src="https://i.imgur.com/BD0pW2Z.png" class="character" id="joao" alt="João" />
       <img src="https://i.imgur.com/z7nSYFk.png" class="character" id="amalry" alt="Amalry" />
-      <div class="heart"></div>
       <div class="hug"></div>
-      <audio autoplay>
-        <source src="https://assets.mixkit.co/active_storage/sfx/1489/1489-preview.mp3" type="audio/mpeg" />
+      <audio autoplay loop> <source src="https://assets.mixkit.co/active_storage/sfx/1489/1489-preview.mp3" type="audio/mpeg" />
+        Seu navegador não suporta o elemento de áudio.
       </audio>
     </div>
   </div>
