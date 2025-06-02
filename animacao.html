@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>a gnt se beijando</title>
+  <title>João & Amalry pixel kiss</title>
   <style>
     body {
       margin: 0;
@@ -103,15 +103,6 @@
       animation: moveAmalryToCenter 3s forwards;
     }
 
-    /*
-      Os personagens têm 48px de largura.
-      Para se encontrarem no centro, João (da esquerda) precisa parar em '50% - 48px'.
-      Isso significa que a borda esquerda de João estará a 48px antes do ponto central da cena,
-      fazendo com que sua borda direita fique exatamente no centro.
-      Amalry (da direita) precisa parar sua borda direita em '50% - 48px' a partir da direita.
-      Isso significa que a borda direita de Amalry estará a 48px antes do ponto central (medido da direita),
-      fazendo com que sua borda esquerda fique exatamente no centro.
-    */
     @keyframes moveJoaoToCenter {
       0% {
         left: 0;
@@ -134,9 +125,9 @@
       position: absolute; /* Posicionamento absoluto para centralização */
       left: 50%; /* Começa no meio horizontal */
       transform: translateX(-50%); /* Ajusta para centralizar o elemento em si */
-      top: 80px; /* Distância do topo da cena */
-      width: 36px;
-      height: 36px;
+      top: 60px; /* Distância do topo da cena - ajustada para o novo tamanho */
+      width: 60px; /* Aumentado o tamanho do coração */
+      height: 60px; /* Aumentado o tamanho do coração */
       background-image: url('https://i.imgur.com/Tln6655.png');
       background-size: cover;
       opacity: 0;
@@ -149,25 +140,8 @@
       100% { transform: translateX(-50%) scale(1); opacity: 1; }
     }
 
-    .hug {
-      position: absolute;
-      left: 50%; /* Centraliza horizontalmente */
-      transform: translateX(-50%); /* Ajusta para centralizar o elemento */
-      bottom: 0; /* Na base da cena, onde os personagens se encontram */
-      width: 64px; /* Largura da imagem do abraço */
-      height: 64px; /* Altura da imagem do abraço */
-      background-image: url('https://i.imgur.com/q1Rb0QS.png');
-      background-size: cover;
-      image-rendering: pixelated;
-      opacity: 0;
-      /* Inicia após o coração aparecer e a animação dos personagens ter terminado */
-      animation: showHug 0.5s ease-in 4s forwards; /* Ajustado o delay para 4s */
-    }
+    /* Removido o CSS para .hug e @keyframes showHug pois o elemento foi removido do HTML */
 
-    @keyframes showHug {
-      0% { opacity: 0; transform: translateX(-50%) scale(0.8); }
-      100% { opacity: 1; transform: translateX(-50%) scale(1); }
-    }
   </style>
 </head>
 <body>
@@ -184,8 +158,8 @@
       <div class="heart"></div>
       <img src="https://i.imgur.com/BD0pW2Z.png" class="character" id="joao" alt="João" />
       <img src="https://i.imgur.com/z7nSYFk.png" class="character" id="amalry" alt="Amalry" />
-      <div class="hug"></div>
-      <audio autoplay loop> <source src="https://assets.mixkit.co/active_storage/sfx/1489/1489-preview.mp3" type="audio/mpeg" />
+      <audio autoplay loop>
+        <source src="https://assets.mixkit.co/active_storage/sfx/1489/1489-preview.mp3" type="audio/mpeg" />
         Seu navegador não suporta o elemento de áudio.
       </audio>
     </div>
