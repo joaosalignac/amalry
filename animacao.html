@@ -7,53 +7,53 @@
   <style>
     body {
       margin: 0;
-      background-color: #87ceeb; /* azul claro (skyblue) */
+      background-color: #87ceeb;
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh; /* Garante que o body ocupe pelo menos toda a altura da tela */
-      font-family: Tahoma, sans-serif; /* Adicionado sans-serif como fallback */
+      min-height: 100vh;
+      font-family: Tahoma, sans-serif;
     }
 
     .window {
-      width: 90%; /* Janela ocupa 90% da largura da tela */
-      max-width: 480px; /* Mas no máximo 480px */
-      background-color: #f0f8ff; /* Azul Alice (bem clarinho) */
+      width: 90%;
+      max-width: 480px;
+      background-color: #f0f8ff;
       border: 3px solid #fff;
       box-shadow:
         inset -1px -1px #808080,
         inset 1px 1px #fff,
         inset -2px -2px #000,
         inset 2px 2px #c0c0c0;
-      border-radius: 3px; /* Pequeno arredondamento para suavizar as bordas da janela */
+      border-radius: 3px;
     }
 
     .title-bar {
       background: linear-gradient(to right, #000080, #0000cd);
       color: white;
-      padding: 4px 8px; /* Ajuste no padding */
+      padding: 4px 8px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       font-weight: bold;
       font-size: 14px;
-      border-top-left-radius: 2px; /* Arredondamento acompanhando a janela */
+      border-top-left-radius: 2px;
       border-top-right-radius: 2px;
     }
 
     .title-buttons {
       display: flex;
-      gap: 3px; /* Pequeno ajuste no espaçamento *
+      gap: 3px;
     }
 
     .btn {
       width: 16px;
       height: 16px;
-      background-color: #c0c0c0; /* Mantido cinza para contraste com o novo fundo da janela */
-      border: 1px solid #808080; /* Borda mais sutil */
+      background-color: #c0c0c0; 
+      border: 1px solid #808080; 
       border-right-color: #fff;
       border-bottom-color: #fff;
-      box-shadow: inset 1px 1px #fff, inset -1px -1px #0000004d; /* Sombra interna para efeito 3D */
+      box-shadow: inset 1px 1px #fff, inset -1px -1px #0000004d; 
       display: flex;
       justify-content: center;
       align-items: center;
@@ -62,7 +62,7 @@
       font-weight: bold;
       cursor: pointer;
       border-radius: 2px;
-      user-select: none; /* Impede a seleção do texto do botão */
+      user-select: none;
     }
     .btn:active {
         border: 1px solid #fff;
@@ -73,11 +73,11 @@
 
 
     .scene {
-      position: relative; /* Essencial para posicionar elementos filhos absolutamente */
+      position: relative;
       width: 100%;
       height: 280px;
-      background-color: #7c8da1; /* Cor de fundo da cena conforme o usuário alterou */
-      overflow: hidden; /* Garante que nada saia da cena */
+      background-color: #7c8da1;
+      overflow: hidden;
       border-top: 2px solid #808080;
       border-left: 2px solid #808080;
       border-right: 2px solid #fff;
@@ -85,22 +85,19 @@
     }
 
     .character {
-      position: absolute; /* Posicionamento absoluto dentro da .scene */
-      width: 100px; /* Largura do personagem aumentada para 100px */
-      height: 100px; /* Altura do personagem aumentada para 100px */
-      /* image-rendering: pixelated; foi removido para tentar suavizar a imagem */
-      bottom: 0; /* Alinha os personagens na base da cena */
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      bottom: 0;
     }
 
     #joao {
-      left: 0; /* Começa na borda esquerda da cena */
-      /* Animação para mover João até pouco antes do centro */
+      left: 0; 
       animation: moveJoaoToCenter 3s forwards;
     }
 
     #amalry {
-      right: 0; /* Começa na borda direita da cena */
-      /* Animação para mover Amalry até pouco antes do centro */
+      right: 0; 
       animation: moveAmalryToCenter 3s forwards;
     }
 
@@ -109,7 +106,6 @@
         left: 0;
       }
       100% {
-        /* Ajustado para a nova largura do personagem (100px) */
         left: calc(50% - 100px);
       }
     }
@@ -119,23 +115,22 @@
         right: 0;
       }
       100% {
-        /* Ajustado para a nova largura do personagem (100px) */
         right: calc(50% - 100px);
       }
     }
 
     .heart {
-      position: absolute; /* Posicionamento absoluto para centralização */
-      left: 50%; /* Começa no meio horizontal */
-      transform: translateX(-50%); /* Ajusta para centralizar o elemento em si */
-      top: 60px; /* Distância do topo da cena - ajustada para o novo tamanho */
-      width: 120px; /* Tamanho do coração conforme o usuário alterou */
-      height: 120px; /* Tamanho do coração conforme o usuário alterou */
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%); 
+      top: 60px;
+      width: 120px; 
+      height: 120px;
       background-image: url('https://i.imgur.com/Tln6655.png');
       background-size: cover;
-      image-rendering: pixelated; /* Mantido para o coração, caso desejado */
+      image-rendering: pixelated;
       opacity: 0;
-      animation: popHeart 1s ease 3s forwards; /* Inicia após os personagens se moverem */
+      animation: popHeart 1s ease 3s forwards; 
     }
 
     @keyframes popHeart {
@@ -168,13 +163,10 @@
   </div>
 
   <script>
-    // Seleciona o botão de fechar pelo ID
     const closeButton = document.getElementById('close-btn');
 
-    // Adiciona um ouvinte de evento de clique ao botão
     if (closeButton) {
       closeButton.addEventListener('click', function() {
-        // Redireciona para o URL especificado
         window.location.href = 'https://joaosalignac.github.io/amalry/';
       });
     }
